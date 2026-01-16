@@ -332,14 +332,12 @@ function displayAllVenuesGrid() {
 
     gridHTML += '</div>';
 
-    // Add floating QR button at bottom
-    gridHTML += '<button class="qr-scan-btn-floating" onclick="showQRScanner()">';
-    gridHTML += t('nfc.scanQRInstead');
-    gridHTML += '</button>';
-
     // Inject into venue screen
     screens.venue.innerHTML = gridHTML;
     showScreen('venue');
+
+    // Show floating QR button (outside screen for Safari compatibility)
+    showFloatingQRButton();
 
     // Log analytics
     if (typeof logEvent === 'function') {
@@ -544,6 +542,29 @@ function scanQRCode(video) {
 function showScreen(screenName) {
     Object.values(screens).forEach(screen => screen.classList.remove('active'));
     screens[screenName].classList.add('active');
+
+    // Hide floating QR button when leaving venue screen
+    if (screenName !== 'venue') {
+        hideFloatingQRButton();
+    }
+}
+
+/**
+ * Show/hide floating QR button (outside screen containers for Safari compatibility)
+ */
+function showFloatingQRButton() {
+    const btn = document.getElementById('floatingQRBtn');
+    if (btn) {
+        btn.textContent = t('nfc.scanQRInstead');
+        btn.style.display = 'block';
+    }
+}
+
+function hideFloatingQRButton() {
+    const btn = document.getElementById('floatingQRBtn');
+    if (btn) {
+        btn.style.display = 'none';
+    }
 }
 
 /**
