@@ -182,6 +182,7 @@ body {
     transform: none;
     justify-content: flex-start;
     align-items: stretch;
+    overflow-y: auto;  /* Enable page-level scrolling */
 }
 
 .venue-video-container {
@@ -314,19 +315,8 @@ body {
     gap: clamp(6px, 2vw, 12px);
     padding: clamp(8px, 2vw, 16px);
     background: #000;
-    overflow-y: scroll;
-    /* Fixed height - smaller grid, more emphasis on QR button */
-    height: 40vh;
-    max-height: 40vh;
-    flex: none;  /* Don't grow/shrink */
     width: 100%;
-    /* Hide scrollbar but keep scroll functionality */
-    scrollbar-width: none;  /* Firefox */
-    -ms-overflow-style: none;  /* IE/Edge */
-}
-
-.venue-grid-container::-webkit-scrollbar {
-    display: none;  /* Chrome/Safari/Opera */
+    /* Grid expands naturally - scroll is on page level */
 }
 
 .venue-card {
@@ -340,7 +330,7 @@ body {
 
 .venue-card-image {
     width: 100%;
-    aspect-ratio: 1 / 1;
+    aspect-ratio: 4 / 3;
     background-size: cover;
     background-position: center;
     background-color: rgba(255, 255, 255, 0.05);
