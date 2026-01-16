@@ -297,12 +297,7 @@ function displayAllVenuesGrid() {
     gridHTML += '<p class="venue-grid-subheader">' + t('nfc.allVenuesSubheader') + '</p>';
     gridHTML += '</div>';
 
-    // Add QR scanner button at top
-    gridHTML += '<div class="venue-grid-actions">';
-    gridHTML += '<button class="qr-scan-btn" onclick="showQRScanner()">';
-    gridHTML += t('nfc.scanQRInstead');
-    gridHTML += '</button>';
-    gridHTML += '</div>';
+    // QR button is now floating only (outside screen for Safari compatibility)
 
     // Build venue grid container
     gridHTML += '<div class="venue-grid-container">';
