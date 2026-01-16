@@ -186,6 +186,13 @@ html {
     to { transform: rotate(360deg); }
 }
 
+.loading-status {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.6);
+    margin-top: 12px;
+    min-height: 20px;
+}
+
 /* Venue Display - Full width, no constraints */
 #venueScreen.active {
     padding: 0;
@@ -321,12 +328,37 @@ html {
     background: rgba(255, 255, 255, 0.2);
 }
 
+/* Floating QR Scan Button - Fixed at bottom */
+.qr-scan-btn-floating {
+    position: fixed;
+    bottom: max(20px, env(safe-area-inset-bottom));
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    padding: 14px 24px;
+    background: rgba(255, 255, 255, 0.95);
+    color: #000;
+    border: none;
+    border-radius: 25px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.qr-scan-btn-floating:active {
+    transform: translateX(-50%) scale(0.95);
+}
+
 .venue-grid-container {
     display: grid;
     grid-template-columns: 1fr 1fr; /* 2 columns */
     grid-auto-rows: min-content;  /* Rows size to fit content */
     gap: clamp(6px, 2vw, 12px);
     padding: clamp(8px, 2vw, 16px);
+    padding-bottom: 80px; /* Space for floating QR button */
     background: #000;
     width: 100%;
     /* Grid expands naturally - scroll is on page level */

@@ -57,19 +57,37 @@ document.addEventListener('DOMContentLoaded', async () => {
  */
 async function handleFindVenue() {
     showScreen('loading');
+    updateLoadingStatus('Requesting location permission...');
 
     // Request location permission
     if (!navigator.geolocation) {
         // GPS not available - fallback to QR
-        showQRScanner();
+        updateLoadingStatus('GPS not available - showing all venues');
+        setTimeout(() => displayAllVenuesGrid(), 1000);
         return;
     }
 
     navigator.geolocation.getCurrentPosition(
-        (position) => handleGPSSuccess(position),
-        (error) => handleGPSError(error),
+        (position) => {
+            updateLoadingStatus('Location found! Searching for venues...');
+            handleGPSSuccess(position);
+        },
+        (error) => {
+            updateLoadingStatus(`Location error: ${error.message}`);
+            setTimeout(() => handleGPSError(error), 1500);
+        },
         { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
     );
+}
+
+/**
+ * Update loading screen status message
+ */
+function updateLoadingStatus(message) {
+    const statusEl = document.querySelector('#loadingScreen .loading-status');
+    if (statusEl) {
+        statusEl.textContent = message;
+    }
 }
 
 /**
@@ -313,6 +331,11 @@ function displayAllVenuesGrid() {
     });
 
     gridHTML += '</div>';
+
+    // Add floating QR button at bottom
+    gridHTML += '<button class="qr-scan-btn-floating" onclick="showQRScanner()">';
+    gridHTML += t('nfc.scanQRInstead');
+    gridHTML += '</button>';
 
     // Inject into venue screen
     screens.venue.innerHTML = gridHTML;
