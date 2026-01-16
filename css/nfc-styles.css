@@ -252,7 +252,7 @@ body {
    ======================================== */
 
 .venue-grid-header {
-    padding: 24px 24px 16px;
+    padding: max(24px, env(safe-area-inset-top)) 24px 16px;
     text-align: center;
     background: #000;
     width: 100%;
@@ -313,10 +313,19 @@ body {
     gap: clamp(6px, 2vw, 12px);
     padding: clamp(8px, 2vw, 16px);
     background: #000;
-    overflow-y: auto;
-    max-height: calc(100dvh - 180px);
-    flex: 1;
+    overflow-y: scroll;
+    /* Fixed height - smaller grid, more emphasis on QR button */
+    height: 40vh;
+    max-height: 40vh;
+    flex: none;  /* Don't grow/shrink */
     width: 100%;
+    /* Hide scrollbar but keep scroll functionality */
+    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none;  /* IE/Edge */
+}
+
+.venue-grid-container::-webkit-scrollbar {
+    display: none;  /* Chrome/Safari/Opera */
 }
 
 .venue-card {
