@@ -496,10 +496,13 @@ function scanQRCode(video) {
                         // Stop camera
                         video.srcObject.getTracks().forEach(track => track.stop());
 
-                        // Show this venue
+                        // Set current venue and log QR success
                         currentVenue = venue;
-                        displayVenue(venue);
                         logQRSuccess(venueKey);
+                        logVenueView(venueKey);
+
+                        // Show modal directly (same as GPS flow)
+                        collectToOmochi();
                         return;
                     }
                 }
