@@ -18,6 +18,19 @@ body {
     padding-right: env(safe-area-inset-right);
     /* Relative positioning for absolute children */
     position: relative;
+    /* Hide scrollbar in IE/Edge legacy */
+    -ms-overflow-style: none;
+}
+
+/* Hide scrollbar but keep functionality */
+/* Webkit browsers (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+    display: none;
+}
+
+/* Firefox */
+html {
+    scrollbar-width: none;
 }
 
 /* Screens use absolute positioning to stack without affecting each other */
