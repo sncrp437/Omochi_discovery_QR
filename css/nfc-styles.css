@@ -334,7 +334,11 @@ html {
     bottom: max(20px, env(safe-area-inset-bottom));
     left: 50%;
     transform: translateX(-50%);
-    z-index: 100;
+    /* Ensure it sits above modals/overlays and works reliably on mobile Safari */
+    z-index: 9999;
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
     padding: 14px 24px;
     background: rgba(255, 255, 255, 0.95);
     color: #000;
@@ -346,6 +350,11 @@ html {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     transition: all 0.2s ease;
     white-space: nowrap;
+}
+
+/* Toggle helper for reliable show/hide */
+.qr-scan-btn-floating.hidden {
+    display: none !important;
 }
 
 .qr-scan-btn-floating:active {
