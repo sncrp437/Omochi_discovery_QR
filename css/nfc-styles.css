@@ -69,13 +69,13 @@ html {
 
 /* Landing Screen */
 .nfc-branding {
-    margin-bottom: 48px;
+    margin-bottom: 24px;
 }
 
 .nfc-logo {
-    width: 80px;
-    height: 80px;
-    margin-bottom: 24px;
+    width: 64px;
+    height: 64px;
+    margin-bottom: 16px;
 }
 
 .nfc-branding h1 {
@@ -92,20 +92,20 @@ html {
 
 /* How It Works */
 .how-it-works {
-    margin: 48px 0;
+    margin: 20px 0;
     text-align: left;
 }
 
 .how-it-works h2 {
     font-size: clamp(18px, 5vw, 20px);
-    margin-bottom: 24px;
+    margin-bottom: 16px;
     text-align: center;
 }
 
 .steps {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 12px;
 }
 
 .step {
@@ -136,8 +136,8 @@ html {
 .why-omochi {
     background: rgba(255, 255, 255, 0.05);
     border-radius: 16px;
-    padding: 24px;
-    margin: 32px 0;
+    padding: 16px;
+    margin: 16px 0 0 0;
     text-align: left;
 }
 
@@ -155,7 +155,7 @@ html {
 /* CTA Button */
 .cta-button {
     width: 100%;
-    padding: 18px;
+    padding: 16px;
     background: #fff;
     color: #000;
     border: none;
@@ -163,7 +163,7 @@ html {
     font-size: 18px;
     font-weight: 700;
     cursor: pointer;
-    margin-top: 32px;
+    margin-top: 20px;
     transition: transform 0.2s;
 }
 
@@ -910,5 +910,108 @@ html {
 
     .omochi-modal-content p {
         font-size: 13px;
+    }
+}
+
+/* ========================================
+   Short Screen Height Adjustments
+   For phones with limited vertical space
+   ======================================== */
+
+/* Short screens (iPhone SE, older Android - ~667px height) */
+@media (max-height: 700px) {
+    .screen {
+        padding: 20px 16px;
+    }
+
+    .nfc-branding {
+        margin-bottom: 16px;
+    }
+
+    .nfc-logo {
+        width: 56px;
+        height: 56px;
+        margin-bottom: 12px;
+    }
+
+    .how-it-works {
+        margin: 16px 0;
+    }
+
+    .why-omochi {
+        padding: 12px;
+        margin: 12px 0 0 0;
+    }
+
+    .cta-button {
+        margin-top: 16px;
+        padding: 14px;
+    }
+}
+
+/* Very short screens (compact displays - ~600px or less) */
+@media (max-height: 600px) {
+    .screen {
+        padding: 12px 12px;
+    }
+
+    .nfc-branding {
+        margin-bottom: 12px;
+    }
+
+    .nfc-logo {
+        width: 48px;
+        height: 48px;
+        margin-bottom: 8px;
+    }
+
+    .nfc-branding h1 {
+        font-size: 18px;
+    }
+
+    .tagline {
+        font-size: 13px;
+    }
+
+    .how-it-works {
+        margin: 12px 0;
+    }
+
+    .how-it-works h2 {
+        font-size: 16px;
+        margin-bottom: 12px;
+    }
+
+    .steps {
+        gap: 8px;
+    }
+
+    .step-number {
+        width: 26px;
+        height: 26px;
+    }
+
+    .step p {
+        font-size: 14px;
+    }
+
+    .why-omochi {
+        padding: 10px;
+        margin: 10px 0 0 0;
+    }
+
+    .why-omochi h3 {
+        font-size: 14px;
+        margin-bottom: 6px;
+    }
+
+    .why-omochi p {
+        font-size: 12px;
+    }
+
+    .cta-button {
+        margin-top: 12px;
+        padding: 12px;
+        font-size: 16px;
     }
 }
