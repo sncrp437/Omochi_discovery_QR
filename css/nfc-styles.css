@@ -331,9 +331,10 @@ html {
 /* QR Button Container - Always rendered, visibility controlled via class (like language toggle) */
 .qr-floating-container {
     position: fixed;
-    bottom: max(20px, env(safe-area-inset-bottom));
+    bottom: max(20px, env(safe-area-inset-bottom, 20px));
     left: 0;
     right: 0;
+    width: 100%;
     z-index: 1000;
     display: flex;
     justify-content: center;
@@ -345,6 +346,7 @@ html {
     transition: opacity 0.2s ease, visibility 0.2s ease;
     -webkit-transform: translateZ(0);
     transform: translateZ(0);
+    will-change: visibility, opacity;
 }
 
 .qr-floating-container.visible {

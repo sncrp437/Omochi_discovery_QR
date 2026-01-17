@@ -548,11 +548,14 @@ function showScreen(screenName) {
  * Show/hide floating QR button (uses visibility class like language toggle for Safari compatibility)
  */
 function showFloatingQRButton() {
+    console.log('[QR] showFloatingQRButton called');
     const container = document.getElementById('qrFloatingContainer');
     const btn = document.getElementById('floatingQRBtn');
+    console.log('[QR] container found:', !!container, 'btn found:', !!btn);
     if (container && btn) {
         btn.textContent = t('nfc.scanQRInstead');
         container.classList.add('visible');
+        console.log('[QR] classList after add:', container.className);
     }
 }
 
@@ -560,6 +563,7 @@ function hideFloatingQRButton() {
     const container = document.getElementById('qrFloatingContainer');
     if (container) {
         container.classList.remove('visible');
+        console.log('[QR] hideFloatingQRButton - visible class removed');
     }
 }
 
