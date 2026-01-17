@@ -551,16 +551,14 @@ function showFloatingQRButton() {
     const btn = document.getElementById('floatingQRBtn');
     if (btn) {
         btn.textContent = t('nfc.scanQRInstead');
-        btn.classList.remove('hidden');
-        btn.style.display = 'block'; // safety fallback
+        btn.style.display = 'block';
     }
 }
 
 function hideFloatingQRButton() {
     const btn = document.getElementById('floatingQRBtn');
     if (btn) {
-        btn.classList.add('hidden');
-        btn.style.display = 'none'; // safety fallback
+        btn.style.display = 'none';
     }
 }
 
