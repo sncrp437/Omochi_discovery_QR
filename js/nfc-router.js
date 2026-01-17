@@ -282,6 +282,9 @@ function displayVenueGrid(venuesArray) {
 
     // Store venues for selection
     window._currentVenueGrid = venuesArray;
+
+    // Show floating QR button (same as all venues grid)
+    showFloatingQRButton();
 }
 
 /**
