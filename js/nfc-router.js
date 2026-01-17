@@ -545,20 +545,21 @@ function showScreen(screenName) {
 }
 
 /**
- * Show/hide floating QR button (outside screen containers for Safari compatibility)
+ * Show/hide floating QR button (uses visibility class like language toggle for Safari compatibility)
  */
 function showFloatingQRButton() {
+    const container = document.getElementById('qrFloatingContainer');
     const btn = document.getElementById('floatingQRBtn');
-    if (btn) {
+    if (container && btn) {
         btn.textContent = t('nfc.scanQRInstead');
-        btn.style.display = 'block';
+        container.classList.add('visible');
     }
 }
 
 function hideFloatingQRButton() {
-    const btn = document.getElementById('floatingQRBtn');
-    if (btn) {
-        btn.style.display = 'none';
+    const container = document.getElementById('qrFloatingContainer');
+    if (container) {
+        container.classList.remove('visible');
     }
 }
 

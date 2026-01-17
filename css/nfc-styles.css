@@ -328,16 +328,33 @@ html {
     background: rgba(255, 255, 255, 0.2);
 }
 
-/* Floating QR Scan Button - Fixed at bottom */
-.qr-scan-btn-floating {
+/* QR Button Container - Always rendered, visibility controlled via class (like language toggle) */
+.qr-floating-container {
     position: fixed;
     bottom: max(20px, env(safe-area-inset-bottom));
-    /* Use left/right auto margins instead of transform for Safari compatibility */
     left: 0;
     right: 0;
-    width: fit-content;
-    margin: 0 auto;
     z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Hidden by default - use visibility not display for Safari compatibility */
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+}
+
+.qr-floating-container.visible {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Floating QR Scan Button - Inside container */
+.qr-scan-btn-floating {
     padding: 14px 24px;
     background: rgba(255, 255, 255, 0.95);
     color: #000;
@@ -349,8 +366,6 @@ html {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     transition: opacity 0.2s ease, box-shadow 0.2s ease;
     white-space: nowrap;
-    -webkit-transform: translateZ(0);  /* Force GPU layer on Safari */
-    transform: translateZ(0);
 }
 
 .qr-scan-btn-floating:active {

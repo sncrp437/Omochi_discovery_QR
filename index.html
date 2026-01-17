@@ -114,10 +114,12 @@
         <button id="backBtn">Go Back</button>
     </div>
 
-    <!-- Floating QR Button - Outside screens for proper fixed positioning on Safari -->
-    <button class="qr-scan-btn-floating" id="floatingQRBtn" style="display: none;" onclick="showQRScanner()">
-        Scan QR Code Instead
-    </button>
+    <!-- Floating QR Button Container - Always rendered like language toggle -->
+    <div class="qr-floating-container" id="qrFloatingContainer">
+        <button class="qr-scan-btn-floating" id="floatingQRBtn" onclick="showQRScanner()">
+            Scan QR Code Instead
+        </button>
+    </div>
 
     <!-- Scripts -->
     <script src="js/i18n.js"></script>

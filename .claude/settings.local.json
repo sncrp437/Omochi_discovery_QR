@@ -5,7 +5,11 @@
       "Bash(git init:*)",
       "Bash(git remote add:*)",
       "Bash(git checkout:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nRe-initialize: Omochi NFC venue discovery app\n\nFixed git repository structure - moved .git to correct project folder location.\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git push:*)",
+      "Bash(git rev-parse:*)",
+      "Bash(git commit:*)"
     ]
   }
 }
