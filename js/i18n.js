@@ -41,6 +41,14 @@ const translations = {
       cameraError: "Camera access denied. Please enable camera permission."
     },
 
+    // Store Choice Modal
+    storeChoice: {
+      title: "Choose Your Store",
+      subtitle: "Select how you'd like to find your venue",
+      browseBtn: "🏪 Browse Stores",
+      scanQRBtn: "📷 Scan QR Code"
+    },
+
     // nfc.html - Omochi Modal
     omochiModal: {
       title: "Save {venueName} to Your Home Screen",
@@ -110,6 +118,14 @@ const translations = {
       backBtn: "戻る",
       collectBtn: "Omochiに集める",
       cameraError: "カメラアクセスが拒否されました。カメラの許可を有効にしてください。"
+    },
+
+    // Store Choice Modal
+    storeChoice: {
+      title: "お店を選択",
+      subtitle: "お店の探し方を選んでください",
+      browseBtn: "🏪 お店一覧から選ぶ",
+      scanQRBtn: "📷 QRコードをスキャン"
     },
 
     // nfc.html - Omochi Modal
@@ -284,6 +300,17 @@ function updateNFCPage() {
     const el = document.querySelector(selector);
     if (el) el.textContent = text;
   }
+
+  // Store Choice Modal
+  const storeChoiceTitle = document.getElementById('storeChoiceTitle');
+  const storeChoiceSubtitle = document.getElementById('storeChoiceSubtitle');
+  const browseStoresBtn = document.getElementById('browseStoresBtn');
+  const scanQRBtn = document.getElementById('scanQRBtn');
+
+  if (storeChoiceTitle) storeChoiceTitle.textContent = t('storeChoice.title');
+  if (storeChoiceSubtitle) storeChoiceSubtitle.textContent = t('storeChoice.subtitle');
+  if (browseStoresBtn) browseStoresBtn.textContent = t('storeChoice.browseBtn');
+  if (scanQRBtn) scanQRBtn.textContent = t('storeChoice.scanQRBtn');
 
   // Omochi Modal - Special handling for elements with nested HTML
   const omochiModalMessage = document.getElementById('omochiModalMessage');

@@ -7,6 +7,12 @@
 let allVenues = [];
 let currentVenue = null;
 
+// Store choice modal state - tracks which grid to show after user selects "Browse Stores"
+let storeChoiceContext = {
+    type: 'all',       // 'all' or 'nearby'
+    nearbyVenues: null // Array of {venue, distance} when type is 'nearby'
+};
+
 /**
  * Detect user's platform for home screen instructions
  * @returns {string} 'ios', 'android', or 'other'
@@ -61,9 +67,9 @@ async function handleFindVenue() {
 
     // Request location permission
     if (!navigator.geolocation) {
-        // GPS not available - fallback to QR
-        updateLoadingStatus('GPS not available - showing all venues');
-        setTimeout(() => displayAllVenuesGrid(), 1000);
+        // GPS not available - show store choice modal
+        updateLoadingStatus('GPS not available - choose your store');
+        setTimeout(() => showStoreChoiceModal('all'), 1000);
         return;
     }
 
@@ -101,9 +107,9 @@ function handleGPSSuccess(position) {
     const venuesInRange = findVenuesWithinRadius(userLat, userLng, 100);
 
     if (venuesInRange.length === 0) {
-        // No venues within 100m - show all venues as fallback
+        // No venues within 100m - show store choice modal
         logGPSNoVenue();
-        displayAllVenuesGrid();
+        showStoreChoiceModal('all');
     } else if (venuesInRange.length === 1) {
         // Only one venue - trigger collect flow directly
         currentVenue = venuesInRange[0].venue;
@@ -111,9 +117,9 @@ function handleGPSSuccess(position) {
         logVenueView(currentVenue.venue_key || currentVenue.id);
         collectToOmochi(); // Go directly to modal/redirect
     } else {
-        // Multiple venues - show grid
-        displayVenueGrid(venuesInRange);
+        // Multiple venues - show store choice modal with nearby venues
         logGPSSuccess(venuesInRange[0].distance); // Log nearest venue distance
+        showStoreChoiceModal('nearby', venuesInRange);
     }
 }
 
@@ -124,8 +130,8 @@ function handleGPSError(error) {
     console.error('GPS error:', error);
     logGPSError(error.code);
 
-    // Show all venues grid as fallback (with QR option)
-    displayAllVenuesGrid();
+    // Show store choice modal as fallback
+    showStoreChoiceModal('all');
 }
 
 /**
@@ -645,6 +651,81 @@ function showOmochiModal(omochiURL) {
 function hideOmochiModal() {
     const modal = document.getElementById('omochiModal');
     modal.classList.remove('show');
+}
+
+/**
+ * Show store choice modal before displaying venue grid
+ * @param {string} type - 'all' for all venues grid, 'nearby' for nearby venues grid
+ * @param {Array} nearbyVenues - Array of {venue, distance} objects (only for 'nearby' type)
+ */
+function showStoreChoiceModal(type = 'all', nearbyVenues = null) {
+    // Store context for when user clicks "Browse Stores"
+    storeChoiceContext = {
+        type: type,
+        nearbyVenues: nearbyVenues
+    };
+
+    const modal = document.getElementById('storeChoiceModal');
+
+    // Update modal text with translations
+    const titleEl = document.getElementById('storeChoiceTitle');
+    const subtitleEl = document.getElementById('storeChoiceSubtitle');
+    const browseBtn = document.getElementById('browseStoresBtn');
+    const scanBtn = document.getElementById('scanQRBtn');
+
+    if (titleEl) titleEl.textContent = t('storeChoice.title');
+    if (subtitleEl) subtitleEl.textContent = t('storeChoice.subtitle');
+    if (browseBtn) browseBtn.textContent = t('storeChoice.browseBtn');
+    if (scanBtn) scanBtn.textContent = t('storeChoice.scanQRBtn');
+
+    // Show modal
+    modal.classList.add('show');
+
+    // Set up button handlers
+    setupStoreChoiceHandlers();
+
+    // Log analytics
+    if (typeof logEvent === 'function') {
+        logEvent('store_choice_modal_shown', { type: type, venues_count: nearbyVenues ? nearbyVenues.length : allVenues.length });
+    }
+}
+
+/**
+ * Hide store choice modal
+ */
+function hideStoreChoiceModal() {
+    const modal = document.getElementById('storeChoiceModal');
+    modal.classList.remove('show');
+}
+
+/**
+ * Set up store choice modal button handlers
+ */
+function setupStoreChoiceHandlers() {
+    const browseBtn = document.getElementById('browseStoresBtn');
+    const scanBtn = document.getElementById('scanQRBtn');
+    const overlay = document.getElementById('storeChoiceModalOverlay');
+
+    browseBtn.onclick = () => {
+        hideStoreChoiceModal();
+        // Show appropriate grid based on stored context
+        if (storeChoiceContext.type === 'nearby' && storeChoiceContext.nearbyVenues) {
+            displayVenueGrid(storeChoiceContext.nearbyVenues);
+        } else {
+            displayAllVenuesGrid();
+        }
+    };
+
+    scanBtn.onclick = () => {
+        hideStoreChoiceModal();
+        showQRScanner();
+    };
+
+    // Close on overlay click (optional - user can tap outside to dismiss)
+    overlay.onclick = () => {
+        hideStoreChoiceModal();
+        showScreen('landing');
+    };
 }
 
 /**
