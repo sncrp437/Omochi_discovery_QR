@@ -209,9 +209,9 @@ html {
     margin-top: 1px;
 }
 
-.benefit-text {
+.benefits .benefit-text {
     font-size: 14px;
-    color: rgba(255, 255, 255, 0.8);
+    color: #fff;
     line-height: 1.5;
 }
 
