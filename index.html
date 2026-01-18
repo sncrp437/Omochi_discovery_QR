@@ -22,44 +22,34 @@
         <div class="omochi-modal-content">
             <button class="omochi-modal-close" id="omochiModalClose">&times;</button>
 
-            <!-- Visual Illustration -->
-            <div class="modal-illustration">
-                <span class="illustration-icon">📱</span>
-                <span class="illustration-badge">+</span>
-            </div>
+            <h2 id="omochiModalTitle">Save Omochi to Home Screen</h2>
+            <p id="omochiModalMessage">Save to home screen to access Omochi anytime!</p>
 
-            <h2 id="omochiModalTitle">ホーム画面に追加</h2>
-            <p id="omochiModalMessage" class="modal-description">Copy A - main description placeholder</p>
-
-            <!-- Benefits List -->
-            <div class="modal-benefits">
-                <div class="benefit-item">
-                    <span class="benefit-icon">⚡</span>
-                    <span class="benefit-text" id="benefitA">Copy A - first benefit placeholder</span>
-                </div>
-                <div class="benefit-item">
-                    <span class="benefit-icon">📍</span>
-                    <span class="benefit-text" id="benefitB">Copy B - second benefit placeholder</span>
-                </div>
-                <div class="benefit-item">
-                    <span class="benefit-icon">💾</span>
-                    <span class="benefit-text" id="benefitC">Copy C - third benefit placeholder</span>
-                </div>
-            </div>
-
-            <!-- Platform Instructions -->
             <div class="platform-instructions">
+                <!-- iOS Instructions -->
                 <div class="instruction-ios" id="instructionIOS">
-                    <p><strong id="omochiIOSStep1">1. 共有アイコンをタップ</strong> <span class="ios-share-icon">⎋</span></p>
-                    <p><strong id="omochiIOSStep2">2.「ホーム画面に追加」をタップ</strong></p>
+                    <p><strong id="omochiIOSStep1">1. Tap the Share icon</strong> <span class="ios-share-icon">⎋</span></p>
+                    <p><strong id="omochiIOSStep2">2. Scroll down and tap "Add to Home Screen"</strong></p>
                 </div>
+
+                <!-- Android Instructions -->
                 <div class="instruction-android" id="instructionAndroid">
-                    <p><strong id="omochiAndroidStep1">1. メニューアイコンをタップ</strong> <span class="android-menu-icon">⋮</span></p>
-                    <p><strong id="omochiAndroidStep2">2.「ホーム画面に追加」をタップ</strong></p>
+                    <p><strong id="omochiAndroidStep1">1. Tap the Menu icon</strong> <span class="android-menu-icon">⋮</span></p>
+                    <p><strong id="omochiAndroidStep2">2. Tap "Add to Home screen"</strong></p>
                 </div>
             </div>
 
-            <button class="omochi-continue-btn" id="omochiContinueBtn">このお店を集める！</button>
+            <!-- Organization Note (addresses clutter fear) -->
+            <div class="organization-note" id="organizationNote">
+                <p id="omochiOrganizationNote">📱 One link, all your venues — Save this once and access all collected places from inside the app. No clutter, just tap to explore!</p>
+            </div>
+
+            <!-- Registration Note (reduces friction) -->
+            <div class="registration-note" id="registrationNote">
+                <p id="omochiRegistrationNote">💡 Register when you're ready — open from your home screen, tap ← Back, and sign up. All venues automatically saved to your account!</p>
+            </div>
+
+            <button class="omochi-continue-btn" id="omochiContinueBtn">Continue to Omochi</button>
         </div>
     </div>
 
@@ -82,37 +72,28 @@
     <div id="landingScreen" class="screen active">
         <div class="nfc-branding">
             <img src="assets/nfc-icon.svg" alt="Discover" class="nfc-logo">
-            <h1>Discover the venue you're at</h1>
-            <p class="tagline">Tap. Discover. Collect.</p>
-        </div>
-
-        <div class="how-it-works">
-            <h2>How it works</h2>
-            <div class="steps">
-                <div class="step">
-                    <span class="step-number">1</span>
-                    <p>Allow location access</p>
-                </div>
-                <div class="step">
-                    <span class="step-number">2</span>
-                    <p>We'll find the venue you're at</p>
-                </div>
-                <div class="step">
-                    <span class="step-number">3</span>
-                    <p>Collect it to your Omochi</p>
-                </div>
-            </div>
+            <h1 id="nfcTitle">また来たい？</h1>
+            <p class="tagline" id="nfcTagline">いい店は、その場で残す。</p>
         </div>
 
         <button id="findVenueBtn" class="cta-button">
-            Find Venue Near Me
+            <span class="cta-icon">📍</span>
+            <span id="findVenueBtnText">このお店を残す</span>
         </button>
 
-        <div class="why-omochi">
-            <h3>Why collect to Omochi?</h3>
-            <p>Build your personal collection of places that matter.
-               Return to favorites, discover new venues, and never forget
-               a great meal.</p>
+        <div class="benefits">
+            <div class="benefit-item">
+                <span class="benefit-icon">✓</span>
+                <span class="benefit-text" id="benefit1Text">お気に入りのお店だけが一つのアプリに集まる</span>
+            </div>
+            <div class="benefit-item">
+                <span class="benefit-icon">✓</span>
+                <span class="benefit-text" id="benefit2Text">予約・特典・最新情報もここに届く</span>
+            </div>
+            <div class="benefit-item">
+                <span class="benefit-icon">✓</span>
+                <span class="benefit-text" id="benefit3Text">Line・SNSフォロー不要</span>
+            </div>
         </div>
     </div>
 
