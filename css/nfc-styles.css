@@ -632,6 +632,17 @@ html {
    Omochi Save to Home Screen Modal
    ======================================== */
 
+@keyframes modalScaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
 .omochi-modal {
     display: none;
     position: fixed;
@@ -665,11 +676,12 @@ html {
     max-width: min(400px, 90vw);
     margin: 0;
     transform: none;
-    padding: clamp(20px, 5vw, 30px) 24px;
-    border-radius: 16px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    padding: clamp(24px, 5vw, 32px) 24px;
+    border-radius: 24px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
     text-align: center;
     z-index: 2001;
+    animation: modalScaleIn 0.3s ease;
 }
 
 .omochi-modal-close {
@@ -701,6 +713,71 @@ html {
     font-size: 16px;
     color: #666;
     line-height: 1.5;
+}
+
+/* Modal Illustration */
+.modal-illustration {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 20px;
+    background: linear-gradient(135deg, #00c6fb 0%, #005bea 100%);
+    border-radius: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.illustration-icon {
+    font-size: 42px;
+}
+
+.illustration-badge {
+    position: absolute;
+    bottom: -8px;
+    right: -8px;
+    width: 32px;
+    height: 32px;
+    background: #4caf50;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Modal Benefits List */
+.modal-benefits {
+    text-align: left;
+    margin-bottom: 24px;
+}
+
+.benefit-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+}
+
+.benefit-icon {
+    width: 36px;
+    height: 36px;
+    background: rgba(0, 198, 251, 0.1);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+}
+
+.benefit-text {
+    font-size: 14px;
+    color: #333;
+    line-height: 1.4;
 }
 
 .platform-instructions {
@@ -741,11 +818,11 @@ html {
 
 .omochi-continue-btn {
     width: 100%;
-    padding: 14px 24px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 16px 24px;
+    background: linear-gradient(135deg, #00c6fb 0%, #005bea 100%);
     color: #fff;
     border: none;
-    border-radius: 12px;
+    border-radius: 14px;
     font-size: 16px;
     font-weight: 600;
     cursor: pointer;
@@ -754,7 +831,7 @@ html {
 
 .omochi-continue-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+    box-shadow: 0 6px 20px rgba(0, 91, 234, 0.4);
 }
 
 .omochi-continue-btn:active {
@@ -776,6 +853,37 @@ html {
 
     .omochi-modal-content > p {
         font-size: 15px;
+    }
+
+    .modal-illustration {
+        width: 80px;
+        height: 80px;
+        border-radius: 20px;
+        margin-bottom: 16px;
+    }
+
+    .illustration-icon {
+        font-size: 36px;
+    }
+
+    .illustration-badge {
+        width: 28px;
+        height: 28px;
+        font-size: 16px;
+    }
+
+    .benefit-item {
+        padding: 8px 0;
+    }
+
+    .benefit-icon {
+        width: 32px;
+        height: 32px;
+        font-size: 16px;
+    }
+
+    .benefit-text {
+        font-size: 13px;
     }
 
     .platform-instructions p {
