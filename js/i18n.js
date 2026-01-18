@@ -51,15 +51,15 @@ const translations = {
 
     // nfc.html - Omochi Modal
     omochiModal: {
-      title: "Save {venueName} to Your Home Screen",
-      message: "You're about to visit this venue on Omochi. Once you arrive, add the page to your home screen — all your collected venues will be organized inside the app, accessible with just one tap.",
+      title: "Collect this venue",
+      message: "Once Omochi opens, add it to your home screen. You'll be able to access all your collected venues anytime.",
       iosStep1: "1. Tap the Share icon",
       iosStep2: '2. Scroll down and tap "Add to Home Screen"',
       androidStep1: "1. Tap the Menu icon",
       androidStep2: '2. Tap "Add to Home screen"',
-      organizationNote: "📱 One link, all your venues — Save this once and access all collected places from inside the app. No clutter, just tap to explore!",
-      registrationNote: "💡 Register when you're ready — open from your home screen, tap ← Back, and sign up. All venues automatically saved to your account!",
-      continueBtn: "Continue to {venueName}"
+      organizationNote: "📱 Save once. Then access all your collected venues with one tap.",
+      registrationNote: "",
+      continueBtn: "Open Omochi"
     },
 
     // collect.html
@@ -130,15 +130,15 @@ const translations = {
 
     // nfc.html - Omochi Modal
     omochiModal: {
-      title: "{venueName}をホーム画面に追加",
-      message: "これからOmochiでこのお店にアクセスします。到着したら、ページをホーム画面に追加してください —　集めたすべてのお店はアプリ内で整理され、ワンタップでアクセスできます。",
+      title: "このお店を集める",
+      message: "Omochiが開いたら、ホーム画面に追加してください。集めたお店がいつでもすぐ見れるようになります。",
       iosStep1: "1. 共有アイコンをタップ",
       iosStep2: "2. 下にスクロールして「ホーム画面に追加」をタップ",
       androidStep1: "1. メニューアイコンをタップ",
       androidStep2: "2. 「ホーム画面に追加」をタップ",
-      organizationNote: "📱 すべてのお店が1つのリンクに！ 一度保存するだけで、アプリ内から集めたすべてのお店にアクセスできます。散らからず、タップするだけでまた次回の予約までできる！",
-      registrationNote: "💡 準備ができたら登録 — ホーム画面から開き、← 戻るをタップしてサインアップ。見つけたイチオシのお店が自動的にアカウントに保存されます！",
-      continueBtn: "{venueName}に進む"
+      organizationNote: "📱 保存は1回だけ。その後は集めたお店すべてにワンタップでアクセス。",
+      registrationNote: "",
+      continueBtn: "Omochiを開く"
     },
 
     // collect.html
@@ -316,31 +316,29 @@ function updateNFCPage() {
   const omochiModalMessage = document.getElementById('omochiModalMessage');
   const omochiOrganizationNote = document.getElementById('omochiOrganizationNote');
   const omochiRegistrationNote = document.getElementById('omochiRegistrationNote');
+  const registrationNoteContainer = document.getElementById('registrationNote');
 
   if (omochiModalMessage) omochiModalMessage.textContent = t('omochiModal.message');
   if (omochiOrganizationNote) omochiOrganizationNote.textContent = t('omochiModal.organizationNote');
-  if (omochiRegistrationNote) omochiRegistrationNote.textContent = t('omochiModal.registrationNote');
 
-  // Note: Title and button are dynamically updated in showOmochiModal() with venue name
+  // Hide registration note container if translation is empty
+  const registrationNoteText = t('omochiModal.registrationNote');
+  if (omochiRegistrationNote) omochiRegistrationNote.textContent = registrationNoteText;
+  if (registrationNoteContainer) {
+    registrationNoteContainer.style.display = registrationNoteText ? 'block' : 'none';
+  }
 
   // Re-translate modal title and button if modal is currently visible
   const modal = document.getElementById('omochiModal');
-  if (modal && modal.classList.contains('show') && typeof currentVenue !== 'undefined' && currentVenue) {
-    // Get venue name based on current language
-    const venueName = currentLanguage === 'ja' && currentVenue.venue_name_ja
-      ? currentVenue.venue_name_ja
-      : currentVenue.venue_name || 'this venue';
-
-    // Update title with translated text + venue name
+  if (modal && modal.classList.contains('show')) {
     const modalTitle = document.getElementById('omochiModalTitle');
     if (modalTitle) {
-      modalTitle.textContent = t('omochiModal.title').replace('{venueName}', venueName);
+      modalTitle.textContent = t('omochiModal.title');
     }
 
-    // Update button with translated text + venue name
     const continueBtn = document.getElementById('omochiContinueBtn');
     if (continueBtn) {
-      continueBtn.textContent = t('omochiModal.continueBtn').replace('{venueName}', venueName);
+      continueBtn.textContent = t('omochiModal.continueBtn');
     }
   }
 

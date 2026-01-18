@@ -599,14 +599,6 @@ function showOmochiModal(omochiURL) {
     const modal = document.getElementById('omochiModal');
     const platform = detectPlatform();
 
-    // Get current language
-    const currentLang = getCurrentLanguage();
-
-    // Get venue name (with fallback)
-    const venueName = currentLang === 'ja' && currentVenue.venue_name_ja
-        ? currentVenue.venue_name_ja
-        : currentVenue.venue_name || 'this venue';
-
     // Show platform-specific instructions
     const iosInstructions = document.getElementById('instructionIOS');
     const androidInstructions = document.getElementById('instructionAndroid');
@@ -623,16 +615,23 @@ function showOmochiModal(omochiURL) {
         iosInstructions.classList.add('active');
     }
 
-    // Update modal text with venue name
+    // Update modal text
     const modalTitle = document.getElementById('omochiModalTitle');
     const continueBtn = document.getElementById('omochiContinueBtn');
 
     if (modalTitle) {
-        modalTitle.textContent = t('omochiModal.title').replace('{venueName}', venueName);
+        modalTitle.textContent = t('omochiModal.title');
     }
 
     if (continueBtn) {
-        continueBtn.textContent = t('omochiModal.continueBtn').replace('{venueName}', venueName);
+        continueBtn.textContent = t('omochiModal.continueBtn');
+    }
+
+    // Hide registration note if translation is empty
+    const registrationNoteContainer = document.getElementById('registrationNote');
+    const registrationNoteText = t('omochiModal.registrationNote');
+    if (registrationNoteContainer) {
+        registrationNoteContainer.style.display = registrationNoteText ? 'block' : 'none';
     }
 
     // Show modal
